@@ -4,10 +4,6 @@ const CardModel = require('./cardModel');
 
 class GameModel {
 
-    // constructor( jugadores){
-    //     //  this.jugadores = jugadores;
-       
-    // }
     constructor(){
       this.iniciarJuego();
     }

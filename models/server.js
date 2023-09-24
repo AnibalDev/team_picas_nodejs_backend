@@ -1,5 +1,13 @@
 const express = require('express');
 const cors = require('cors');
+const { log } = require('console');
+
+const Player = require('./userModel');
+const users = [];
+const games = [];
+const room = [];
+
+
 
 class Server {
   constructor() {
@@ -16,14 +24,27 @@ class Server {
   }
   middlewares() {
     this.app.use(cors());
-
   }
   routes() {
 
   }
   socketsEvents() {
-    this.io.on('connection', socket => {
-      console.log('Cliente connectado');
+    this.io.on('connection', (socket) => {
+      const username = socket.handshake.query.username;
+
+      users.push(new Player(socket.id, username));
+
+      socket.on('joinGame', (data) => {
+        socket.join('room1')
+        this.io.to('room1').emit({users})
+      }),
+      socket.on("disconnect", () => {
+        console.log('Usuario Desconectado',socket.id); 
+      });
+    })
+    
+    this.io.on('disconnection', (socket) => {
+      console.log('user disconnected');
     })
   }
   listen() {
@@ -31,7 +52,6 @@ class Server {
       console.log('Servidor corriendo en puerto', this.port);
     }) 
   }
-
 }
 
 module.exports = Server;
