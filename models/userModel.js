@@ -6,7 +6,11 @@ class Player {
          this.value = value;
          this.symbol = symbol;
          this.color = color;
+         this.mano = [];
     }
+    asignarMano(mano) {
+        this.mano = mano;
+      }
     
 }
 

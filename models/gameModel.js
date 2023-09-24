@@ -1,5 +1,5 @@
- const CardModel = require('./cardModel');
- const userModel = require('./userModel')
+ const CardModel = require('../models/cardModel');
+ const userModel = require('../models/userModel')
  const {Stack} = require('datastructures-js')
  
 
@@ -12,13 +12,15 @@ class GameModel {
     constructor(){
       this.iniciarJuego();
     }
+
+    
     
     asignarMano(cantidadCartas){
        const mano = []
        const mazo = this.generarCartas() ///genera el mazo
         for (let i = 0; i < cantidadCartas; i++) {
           const cartas =   Math.floor(Math.random()* mazo.size)
-          const removeCarta = mazo.pop()
+          const removeCarta = mazo.pop(cartas)
           mano.push(removeCarta)
          
           
@@ -34,30 +36,45 @@ class GameModel {
        const mano3 = new Stack();
        const mano4 = new Stack();
 
-       let manoasig = this.asignarMano( 9) 
-       let manoasig2 = this.asignarMano( 9)
-       let manoasig3 = this.asignarMano( 9)
-       let manoasig4 = this.asignarMano( 9)//pasa la cantidad de cartas
 
        for (let i = 0; i <= 8; i++) {
-         mano1.push(stack.pop())
-         mano2.push(stack.pop())
-         mano3.push(stack.pop())
-         mano4.push(stack.pop())
+        mano1.push(stack.pop())
+        mano2.push(stack.pop())
+        mano3.push(stack.pop())
+        mano4.push(stack.pop())
+       
+      }
+    
+
+        let manoasig = this.asignarMano( 9) 
+        // let manoasig2 = this.asignarMano( 9)
+        // let manoasig3 = this.asignarMano( 9)
+        // let manoasig4 = this.asignarMano( 9)//pasa la cantidad de cartas
         
-       }
+
+        const jugador1 = new userModel(123, 1, 'hey', manoasig)
+        // const jugador2 = new userModel(456, 2, 'Ani', manoasig2)
+        // const jugador3 = new userModel(789, 3, 'Jose', manoasig3)
+        // const jugador4 = new userModel(987, 4, 'Odalys',manoasig4)
+
+        console.log('mano jugador 1', jugador1)
+        // console.log('mano jugador 2', jugador2)
+        // console.log('mano jugador 3', jugador3)
+        // console.log('mano jugador 4', jugador4)
+        console.log('tamaño del mazo restante', stack.size())
+       
+      
+
+      
        
         // console.log(mano1)
         // console.log(stack.size());
-       console.log('mano jugador 1', manoasig)
-       console.log('tamaño del mazo restante', stack.size())
+       
 
-       const jugador1 = new userModel(123, 1, 'hey', manoasig)
-       const jugador2 = new userModel(123, 1, 'hey', manoasig2)
-       const jugador3 = new userModel(123, 1, 'hey', manoasig3)
-       const jugador4 = new userModel(123, 1, 'hey', manoasig4)
+      
        
     }
+
      barajar(array) {
         let currentIndex = array.length,  randomIndex;
       
