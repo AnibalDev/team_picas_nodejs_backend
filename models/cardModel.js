@@ -1,5 +1,3 @@
-
-
 class CardModel {
     constructor(type, value, symbol, color){
          this.type = type;
@@ -8,6 +6,5 @@ class CardModel {
          this.color = color;
     }
 }
-
 
 module.exports = CardModel;

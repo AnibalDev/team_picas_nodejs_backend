@@ -1,10 +1,9 @@
-const CardModel = require('./cardModel');
 
-class Player {
+class User {
     constructor(id, nombre){
         this.id = id, 
         this.nombre = nombre
     };
 }
 
-module.exports = Player;
+module.exports = User;
